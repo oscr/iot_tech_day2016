@@ -8,6 +8,8 @@ In this series of exercises you will build a Linux distribution for Raspberry Pi
 ### Few recommendations
 Make sure to have at least(!) 50 gb of hard disk space available.
 
+TODO Explain this in more detail 
+I will work from a folder called __yocto__ in my home folder. If you choose a different location please take care to change paths. 
 
 ###A supported distribution:
 In order to use Yocto you need to install a Linux distribution that is supported. You can find the full list here: 
@@ -102,9 +104,7 @@ If changed mine to print "Hello IoT Tech Day!" instead.
 The last thing we'll do is to add our custom image
 
     mkdir -p meta-iot-tech-day/recipes-core/images
-    cd meta-iot-tech-day/recipes-core/images/
-    touch meta-iot-tech-day/recipes-core/images/qemu-iot-tech-image.bb
-     
+
 Using your favorit editor open the recipe:     
      
     nano meta-iot-tech-day/recipes-core/images/qemu-iot-tech-image.bb
@@ -143,6 +143,7 @@ When startup is completed you will see the following:
 
 The first step to get our Linux distribution running on Raspberry Pi is to obtain a __Board Support Package__. We will find that in the Raspberry Pi layer: 
 
+    cd .. 
     git clone -b jethro git://git.yoctoproject.org/meta-raspberrypi
     
 If we check inside the meta-raspberrypi layer we will see that there are three available images.
@@ -152,39 +153,58 @@ If we check inside the meta-raspberrypi layer we will see that there are three a
 
 We will base our new image on the rpi-basic-image
     
-ecd recipes-core/images/
-     touch qemu-iot-tech-image.bb
-     oscr@Loke:~/yocto/poky$ cd meta-iot-tech-day/recipes-core/images/
-oscr@Loke:~/yocto/poky/meta-iot-tech-day/recipes-core/images$ ls
-qemu-iot-tech-image.bb
-oscr@Loke:~/yocto/poky/meta-iot-tech-day/recipes-core/images$ cp qemu-iot-tech-image.bb rpi-iot-tech-image.bb 
-oscr@Loke:~/yocto/poky/meta-iot-tech-day/recipes-core/images$ nano rpi-iot-tech-image.bb 
+    nano meta-iot-tech-day/recipes-core/images/rpi-iot-tech-image.bb
+ 
+Make sure the file contains:        
 
-equire meta-raspberrypi/recipes-core/images/rpi-basic-image.bb
+    require /home/oscar/yocto/poky/meta-raspberrypi/recipes-core/images/rpi-basic-image.bb
 
-IMAGE_INSTALL += " helloIotTech"
+    IMAGE_INSTALL += " helloIotTech"
 
+__NOTE__ Make sure to replace the full path above!
 
-     
-TODO Add image for RPI
+    cd build
+    nano conf/local.conf
+    
+If you have a Raspberry Pi enter the following at the top of the file:
 
+    MACHINE="raspberrypi" 
 
-TODO Handle RPI 1 and 2
+Or if you have a Raspberry Pi 2:
 
-oscr@Loke:~/yocto/poky/build$ bitbake-layers add-layer /home/oscr/yocto/poky/meta-raspberrypi/
-oscr@Loke:~/yocto/poky/build$ bitbake-layers add-layer /home/oscr/yocto/poky/meta-iot-tech-day/
-oscr@Loke:~/yocto/poky/build$ bitbake rpi-iot-tech-image
+    MACHINE="raspberrypi2
 
+After that we want to make sure to add the Raspberry Pi layer
 
-TODO Build image
+    bitbake-layers add-layer $HOME/meta-raspberrypi/
+    
+If we look at the 
+
+    cat conf/bblayers.conf
+    
+You should see both the something like this 
+
+    BBLAYERS ?= " \
+    /home/oscar/yocto/poky/meta \
+    /home/oscar/yocto/poky/meta-yocto \
+    /home/oscar/yocto/poky/meta-yocto-bsp \
+    /home/oscar/yocto/poky/meta-iot-tech-day \
+    /home/oscar/yocto/poky/meta-raspberrypi \
+    "
+
+We are now ready to build our image:
+
+    bitbake rpi-iot-tech-image
+
 TODO Execute img
 
+TODO Summary!
 
 ## More information
 If you would like more information I can warmly recommend reading the following resources. Good luck!
 
+[About meta-raspberrypi layer](http://git.yoctoproject.org/cgit/cgit.cgi/meta-raspberrypi/about/)
+
 [Yocto Project Documentation](https://www.yoctoproject.org/documentation "Yocto Project Documentation") 
 
 [Example recipe: mtr](http://cgit.openembedded.org/meta-openembedded/tree/meta-networking/recipes-support/mtr/mtr_0.86.bb)
-
-
