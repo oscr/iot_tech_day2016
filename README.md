@@ -49,13 +49,23 @@ Now we are ready to run.
 
 __NOTE__ When login prompt. Enter: __root__ 
 
+__NOTE__ If you're running on a system without display you may have to use: __runqemu qemux86 nographic__
+
 Congratulations! You have just built the reference implamentation (Poky) for the first time.
 
 ##Step 2: Making our own layer and recipe
 In the previous step we build the reference implementation without any changes. In this step we’re going to customize it by adding a recipe. In order to do this will will add a layer where the recipe will be placed. We will also create our own image that will contain the recipe. 
 
+Make sure your current directory is poky folder.
+
+    cd ..
+    pwd
+    /home/oscar/yocto/poky
+
+We will now create our own layer
+
     yocto-layer create iot-tech-day
-    Please enter the layer priority you'd like to use for the layer: [default: 6] 
+    Please enter the layer priority you'd like to use for the layer: [default: 6] 6
     Would you like to have an example recipe created? (y/n) [default: n] y
     Please enter the name you'd like to use for your example recipe: [default: example] helloIotTech
     Would you like to have an example bbappend file created? (y/n) [default: n] n
@@ -66,27 +76,47 @@ In the previous step we build the reference implementation without any changes. 
 
 You will notice that a folder meta-iot-tech-day has been added. 
 
-TODO Add image of file structure here
+After adding the layer you should have folder with the following structure:
 
-TODO Inspect our new recipe: helloIotTech
+    tree meta-iot-tech-day/
+    meta-iot-tech-day/
+    ├── conf
+    │   └── layer.conf
+    ├── COPYING.MIT
+    ├── README
+    └── recipes-example
+        └── example
+            ├── helloIotTech-0.1
+            │   ├── example.patch
+            │   └── helloworld.c
+            └── helloIotTech_0.1.bb
+
+Note the generated recipe: helloIotTech_0.1.bb 
+
+For fun lets edit the helloworld.c
+
+    nano meta-iot-tech-day/recipes-example/example/helloIotTech-0.1/helloworld.c
+
+If changed mine to print "Hello IoT Tech Day!" instead.
 
 The last thing we'll do is to add our custom image
 
-     mkdir -p recipes-core/images
-     cd recipes-core/images/
-     touch qemu-iot-tech-image.bb
+    mkdir -p meta-iot-tech-day/recipes-core/images
+    cd meta-iot-tech-day/recipes-core/images/
+    touch meta-iot-tech-day/recipes-core/images/qemu-iot-tech-image.bb
      
 Using your favorit editor open the recipe:     
      
-     nano qemu-iot-tech-image.bb
+    nano meta-iot-tech-day/recipes-core/images/qemu-iot-tech-image.bb
 
 Enter the following information:
 
-     require recipes-core/images/core-image-minimal.bb
-     IMAGE_INSTALL += " helloIotTech"
+    require recipes-core/images/core-image-minimal.bb
+    IMAGE_INSTALL += " helloIotTech"
 
 As a final step we need to add the layer to our conf/bblayers.conf so that bitbake can find it. We’ll do this using
 
+    cd build
     bitbake-layers add-layer $HOME/yocto/poky/meta-iot-tech-day/
 
 The last argument is the path to our created layer. I happen to have this in my home folder under yocto/poky. __Make sure that it reflects the path that you have.__
@@ -98,21 +128,53 @@ Now we can build our custom image by running
 When the build has completed you can again run it with QEMU
 
     runqemu qemux86
-
-__NOTE__ Login as: __root__
-
-You can now execute the helloworld program in the QEMU:
-
-    helloworld
     
-Should print "Hello IoT Tech Day!"
+When startup is completed you will see the following:
+
+    Poky (Yocto Project Reference Distro) 2.0.1 qemux86 /dev/ttyS0
+
+    qemux86 login: root
+    root@qemux86:~# helloworld
+    Hello IoT Tech Day!
+
 
 ##Step 3: Building our distribution for Raspberry Pi
 
-TODO Clone RPI layer
+
+The first step to get our Linux distribution running on Raspberry Pi is to obtain a __Board Support Package__. We will find that in the Raspberry Pi layer: 
+
+    git clone -b jethro git://git.yoctoproject.org/meta-raspberrypi
+    
+If we check inside the meta-raspberrypi layer we will see that there are three available images.
+
+    ls meta-raspberrypi/recipes-core/images/
+    rpi-basic-image.bb  rpi-hwup-image.bb  rpi-test-image.bb
+
+We will base our new image on the rpi-basic-image
+    
+ecd recipes-core/images/
+     touch qemu-iot-tech-image.bb
+     oscr@Loke:~/yocto/poky$ cd meta-iot-tech-day/recipes-core/images/
+oscr@Loke:~/yocto/poky/meta-iot-tech-day/recipes-core/images$ ls
+qemu-iot-tech-image.bb
+oscr@Loke:~/yocto/poky/meta-iot-tech-day/recipes-core/images$ cp qemu-iot-tech-image.bb rpi-iot-tech-image.bb 
+oscr@Loke:~/yocto/poky/meta-iot-tech-day/recipes-core/images$ nano rpi-iot-tech-image.bb 
+
+equire meta-raspberrypi/recipes-core/images/rpi-basic-image.bb
+
+IMAGE_INSTALL += " helloIotTech"
+
+
+     
 TODO Add image for RPI
 
+
 TODO Handle RPI 1 and 2
+
+oscr@Loke:~/yocto/poky/build$ bitbake-layers add-layer /home/oscr/yocto/poky/meta-raspberrypi/
+oscr@Loke:~/yocto/poky/build$ bitbake-layers add-layer /home/oscr/yocto/poky/meta-iot-tech-day/
+oscr@Loke:~/yocto/poky/build$ bitbake rpi-iot-tech-image
+
 
 TODO Build image
 TODO Execute img
