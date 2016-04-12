@@ -192,6 +192,17 @@ You should see both the something like this
     /home/oscar/yocto/poky/meta-raspberrypi \
     "
 
+We can confirm it works by typing the following:
+
+    bitbake-layers show-layers
+    layer                 path                                      priority
+    ==========================================================================
+    meta                  /home/oscar/yocto/poky/meta               5
+    meta-yocto            /home/oscar/yocto/poky/meta-yocto         5
+    meta-yocto-bsp        /home/oscar/yocto/poky/meta-yocto-bsp     5
+    meta-iot-tech-day     /home/oscar/yocto/poky/meta-iot-tech-day  6
+    meta-raspberrypi      /home/oscar/yocto/poky/meta-raspberrypi   9
+
 We are now ready to build our image:
 
     bitbake rpi-iot-tech-image
