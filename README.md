@@ -2,21 +2,25 @@
 
 #Building your own Linux distribution for embedded devices
 
-In this series of exercises you will build a Linux distribution for Raspberry Pi. We will do this in three steps. We will begin by setting up our build system. We will then build the reference implementation called Poky and run it with an emulator (QEMU). After that we will customize Poky, effectively making it our own distribution. In the final step we will obtain the Raspberry Pi hardware support and build our own custom image. After this final step will have a bootable image. For example we could write it to a sd card and boot a Raspberry Pi with it. 
+In this series of exercises you will build a Linux distribution for Raspberry Pi. We will begin by setting up our build machine environment. After that we will build the reference implementation called Poky and run it with QEMU (en emulator). In the next step we will customize Poky by adding a layer containing a helloworld example recipe and image. In the final step we will obtain Raspberry Pi hardware support and build an image. This image could for example be written to an SD card and used to boot a Raspberry Pi.
+
 
 ##Prerequisites
-### Few recommendations
+### Advice
 Make sure to have at least(!) 50 gb of hard disk space available.
 
-TODO Explain this in more detail 
-I will work from a folder called __yocto__ in my home folder. If you choose a different location please take care to change paths. 
+In my examples I work from a folder called yocto in my home folder. Therefore in the examples my path will start with 
+
+    /home/oscar/yocto
+
+Please make sure to change the path where required.
 
 ###A supported distribution:
 In order to use Yocto you need to install a Linux distribution that is supported. You can find the full list here: 
 
 http://www.yoctoproject.org/docs/2.0/ref-manual/ref-manual.html#detailed-supported-distros
 
-I will use Ubuntu 14.04 LTS as an example because I really like it.
+In my examples I will use Ubuntu 14.04 LTS.
 
 ###Install required packages
 The following packages are required for Ubuntu. 
