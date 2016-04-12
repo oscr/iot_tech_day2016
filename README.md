@@ -39,7 +39,9 @@ First we need to get the reference implementation Poky
     git clone -b jethro git://git.yoctoproject.org/poky
     cd poky
 
-At the current time jethro is the newest release so we will use it. However things might change fast so keep an eye on the documentation for a newer release. After we’ve cloned Poky we need to set up our environment with
+__NOTE__ Currently Jethro is the newest release. However things might change fast so keep an eye out for newer releases. 
+
+After we've cloned Poky we need to set up our environment.
 
     source oe-init-build-env
 
