@@ -62,7 +62,7 @@ __Note__ If you're running on a system without display you may have to use: __ru
 ##Step 2: Making our own layer and recipe
 In the previous step we built Poky without any changes. But in this step we're going to customize it by adding a layer which will contain our custom image and a recipe for a helloworld application.
 
-Make sure that you're in the `poky` folder (for me that's `/home/oscr/yocto/poky`)
+Make sure that you're in the `poky` folder (for me that's `/home/oscar/yocto/poky`)
 
 We will now create our own layer which we will call `iot-tech-day` and at the same time generate a recipe which we will call `helloIotTech`. Rember that if you open a new terminal you need to `source oe-init-build-env` again.
 
@@ -117,14 +117,17 @@ Enter the following information:
 
 __Note__ It's important to add a space in front of `helloIotTech`!
 
-As a final step we need to add the layer to our conf/bblayers.conf so that bitbake can find it. We’ll do this using
+Go back to the `build` directory. For me that's `/home/oscar/yocto/poky/build`
 
     cd build
+    
+Now as a final step we need to add our new layer `meta-iot-tech-day` to our configuration file `conf/bblayers.conf`.
+    
     bitbake-layers add-layer $HOME/yocto/poky/meta-iot-tech-day/
 
-The last argument is the path to our created layer. I happen to have this in my home folder under yocto/poky. __Make sure that it reflects the path that you have.__
+The last argument is the path to our created layer. __Make sure that it reflects the path that you have.__
 
-Now we can build our custom image by running
+Now we can build our custom image by running:
 
     bitbake qemu-iot-tech-image
 
