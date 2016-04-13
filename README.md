@@ -39,7 +39,7 @@ First we need to get the reference implementation Poky
     git clone -b jethro git://git.yoctoproject.org/poky
     cd poky
 
-__NOTE__ Currently Jethro is the newest release. However things might change fast so keep an eye out for newer releases. 
+__Note__ Currently Jethro is the newest release. However things might change fast so keep an eye out for newer releases. 
 
 After we've cloned Poky we need to set up our environment.
 
@@ -55,9 +55,9 @@ Now we are ready to run.
 
     runqemu qemux86
 
-__NOTE__ When login prompt. Enter: __root__ 
+__Note__ When login prompt. Enter: __root__ 
 
-__NOTE__ If you're running on a system without display you may have to use: __runqemu qemux86 nographic__
+__Note__ If you're running on a system without display you may have to use: __runqemu qemux86 nographic__
 
 ##Step 2: Making our own layer and recipe
 In the previous step we built Poky without any changes. But in this step we're going to customize it by adding a layer which will contain our custom image and a recipe for a helloworld application.
@@ -93,26 +93,29 @@ After adding the layer you should have folder with the following structure:
             │   └── helloworld.c
             └── helloIotTech_0.1.bb
 
-Note the generated recipe: helloIotTech_0.1.bb 
+You will now have a generated recipe `helloIotTech_0.1.bb` with the source code: `helloworld.c` and `example.patch`
 
-For fun lets edit the helloworld.c
+For fun lets edit `helloworld.c`
 
     nano meta-iot-tech-day/recipes-example/example/helloIotTech-0.1/helloworld.c
 
-If changed mine to print "Hello IoT Tech Day!" instead.
+I change my example to print "Hello IoT Tech Day!" instead.
 
-The last thing we'll do is to add our custom image
+We also need an image that we will add our recipe to
 
     mkdir -p meta-iot-tech-day/recipes-core/images
 
-Using your favorit editor open the recipe:     
+Using nano (or your favorit editor) create the following image recipe     
      
     nano meta-iot-tech-day/recipes-core/images/qemu-iot-tech-image.bb
 
 Enter the following information:
 
     require recipes-core/images/core-image-minimal.bb
+    
     IMAGE_INSTALL += " helloIotTech"
+
+__Note__ It's important to add a space in front of `helloIotTech`!
 
 As a final step we need to add the layer to our conf/bblayers.conf so that bitbake can find it. We’ll do this using
 
