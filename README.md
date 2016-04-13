@@ -1,6 +1,6 @@
 #Building your own Linux distribution for embedded devices
 
-In this series of exercises you will build a Linux distribution for Raspberry Pi. We will begin by setting up our build machine environment. After that we will build the reference implementation called Poky and run it with QEMU (en emulator). In the next step we will customize Poky by adding a layer containing a helloworld example recipe and image. In the final step we will obtain Raspberry Pi hardware support and build an image. This image could for example be written to an SD card and used to boot a Raspberry Pi.
+In this series of exercises you will build a Linux distribution for Raspberry Pi. We will begin by setting up our build machine environment. After that we will build the reference implementation called Poky and run it with QEMU (an emulator). In the next step we will customize Poky by adding a layer containing a helloworld example recipe and image. In the final step we will obtain Raspberry Pi hardware support and build an image. This image could for example be written to an SD card and used to boot a Raspberry Pi.
 
 Please feel free to contact me if you find any mistakes. All feedback is welcome. 
 
