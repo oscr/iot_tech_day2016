@@ -1,9 +1,8 @@
-# WARNING WORK IN PROGRESS!!! INFORMATION MAY BE INCORRECT OR INCOMPLETE
-
 #Building your own Linux distribution for embedded devices
 
 In this series of exercises you will build a Linux distribution for Raspberry Pi. We will begin by setting up our build machine environment. After that we will build the reference implementation called Poky and run it with QEMU (en emulator). In the next step we will customize Poky by adding a layer containing a helloworld example recipe and image. In the final step we will obtain Raspberry Pi hardware support and build an image. This image could for example be written to an SD card and used to boot a Raspberry Pi.
 
+Please feel free to contact me if you find any mistakes. All feedback is welcome. 
 
 ##Prerequisites
 ### Advice
@@ -229,17 +228,19 @@ While running bitbake you should notice that the `Build Configuration` has chang
     meta-iot-tech-day = "jethro:6dba9abd43f7584178de52b623c603a5d4fcec5c"
     meta-raspberrypi  = "jethro:f2cff839f52a6e6211337fc45c7c3eabf0fac113"
 
-When it's completed you will find the bootable image in TODO Add path
+When the build is completed you'll find the bootable image here
 
-You can for example write this image to and SD Card. Recommend reading [this](https://www.raspberrypi.org/documentation/installation/installing-images/linux.md)
+    build/tmp/deploy/images/raspberrypi/rpi-iot-tech-image-raspberrypi.rpi-sdimg
 
-After you booted your Raspberry Pi you should be able to connect it to a monitor and/or ssh to it. For example
+Advice how to write this image to an SD Card can be found  [here](https://www.raspberrypi.org/documentation/installation/installing-images/linux.md)
+
+Once that is done you should be ready to go. If you want you can connect a monitor to it and after it's booted you should be able to ssh to it. In my case
 
     ssh root@192.168.0.17
     root@raspberrypi:~# helloworld 
     Hello IoT Tech Day!
 
-And this completes our exercises. But we have only scratched the surface of what is possible. You could for example add more applications, write a kernel patch, try to run Poky on something else than Raspberry Pi. There are many more things to discover and I hope you'll have fun doing so. 
+It works and this completes our excercises. But we have only scratched the surface of what is possible. You could for example add more applications, write a kernel module, run Poky on some other hardware or investigate booting from TFTP. There are lots of more things to discover and I hope you'll have fun while doing so!
 
 ## More information
 For more information I can warmly recommend reading the following resources.
