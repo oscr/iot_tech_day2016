@@ -18,7 +18,7 @@ Please make sure to change the path where required.
 ###A supported distribution:
 In order to use Yocto you need to install a Linux distribution that is supported. You can find the full list here: 
 
-http://www.yoctoproject.org/docs/2.0.1/ref-manual/ref-manual.html#detailed-supported-distros
+http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#detailed-supported-distros
 
 In my examples I will use Ubuntu 14.04 LTS.
 
@@ -30,7 +30,7 @@ The following packages are required for Ubuntu.
 
 If you are using any other supported distribution you’ll find the required packages here:
 
-http://www.yoctoproject.org/docs/2.0.1/ref-manual/ref-manual.html#required-packages-for-the-host-development-system
+http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#required-packages-for-the-host-development-system
 
 
 ##Step 1: Building Poky and using QEMU
@@ -234,6 +234,8 @@ TODO dd to sd card instructions
 
 ## More information
 If you would like more information I can warmly recommend reading the following resources. Good luck!
+
+[Yocto Project Quick Start](http://www.yoctoproject.org/docs/current/yocto-project-qs/yocto-project-qs.htlm)
 
 [Search for layers and recipes](http://layers.openembedded.org/)
 
