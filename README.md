@@ -138,7 +138,7 @@ You should see both the something like this
       /home/oscr/yocto/poky/meta-iot-tech-day \
       "
 
-Alternativley we could also use `bitbake-layers` to inspect what layers we have added.
+Alternatively we could also use `bitbake-layers` to inspect what layers we have added.
 
     bitbake-layers show-layers
     layer                 path                                      priority
@@ -165,9 +165,9 @@ When startup is completed you will see the following:
     Hello IoT Tech Day!
 
 ##Step 3: Building our distribution for Raspberry Pi
+In the final step we will now get our Linux distribution running on actual Raspberry Pi hardware. To do this we need a  __Board Support Package__ to provide hardware support. We can find that in the `meta-raspberryp` layer. 
 
-
-The first step to get our Linux distribution running on Raspberry Pi is to obtain a __Board Support Package__. We will find that in the Raspberry Pi layer: 
+__Hint__ You can search for available layers [here](http://layers.openembedded.org/)
 
     cd .. 
     git clone -b jethro git://git.yoctoproject.org/meta-raspberrypi
@@ -214,6 +214,8 @@ TODO Summary!
 
 ## More information
 If you would like more information I can warmly recommend reading the following resources. Good luck!
+
+[Search for layers and recipes](http://layers.openembedded.org/)
 
 [About meta-raspberrypi layer](http://git.yoctoproject.org/cgit/cgit.cgi/meta-raspberrypi/about/)
 
