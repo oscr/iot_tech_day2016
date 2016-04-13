@@ -127,6 +127,27 @@ Now as a final step we need to add our new layer `meta-iot-tech-day` to our conf
 
 The last argument is the path to our created layer. __Make sure that it reflects the path that you have.__
 
+If we take a look at `conf/bblayers.conf` you should see something like this:
+
+You should see both the something like this 
+
+    BBLAYERS ?= " \
+      /home/oscr/yocto/poky/meta \
+      /home/oscr/yocto/poky/meta-yocto \
+      /home/oscr/yocto/poky/meta-yocto-bsp \
+      /home/oscr/yocto/poky/meta-iot-tech-day \
+      "
+
+Alternativley we could also use `bitbake-layers` to inspect what layers we have added.
+
+    bitbake-layers show-layers
+    layer                 path                                      priority
+    ==========================================================================
+    meta                  /home/oscr/yocto/poky/meta                5
+    meta-yocto            /home/oscr/yocto/poky/meta-yocto          5
+    meta-yocto-bsp        /home/oscr/yocto/poky/meta-yocto-bsp      5
+    meta-iot-tech-day     /home/oscr/yocto/poky/meta-iot-tech-day   6
+
 Now we can build our custom image by running:
 
     bitbake qemu-iot-tech-image
@@ -142,7 +163,6 @@ When startup is completed you will see the following:
     qemux86 login: root
     root@qemux86:~# helloworld
     Hello IoT Tech Day!
-
 
 ##Step 3: Building our distribution for Raspberry Pi
 
@@ -184,31 +204,6 @@ After that we want to make sure to add the Raspberry Pi layer
 
     bitbake-layers add-layer $HOME/meta-raspberrypi/
     
-If we look at the 
-
-    cat conf/bblayers.conf
-    
-You should see both the something like this 
-
-    BBLAYERS ?= " \
-    /home/oscar/yocto/poky/meta \
-    /home/oscar/yocto/poky/meta-yocto \
-    /home/oscar/yocto/poky/meta-yocto-bsp \
-    /home/oscar/yocto/poky/meta-iot-tech-day \
-    /home/oscar/yocto/poky/meta-raspberrypi \
-    "
-
-We can confirm it works by typing the following:
-
-    bitbake-layers show-layers
-    layer                 path                                      priority
-    ==========================================================================
-    meta                  /home/oscar/yocto/poky/meta               5
-    meta-yocto            /home/oscar/yocto/poky/meta-yocto         5
-    meta-yocto-bsp        /home/oscar/yocto/poky/meta-yocto-bsp     5
-    meta-iot-tech-day     /home/oscar/yocto/poky/meta-iot-tech-day  6
-    meta-raspberrypi      /home/oscar/yocto/poky/meta-raspberrypi   9
-
 We are now ready to build our image:
 
     bitbake rpi-iot-tech-image
