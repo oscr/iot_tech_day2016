@@ -62,9 +62,9 @@ __NOTE__ If you're running on a system without display you may have to use: __ru
 ##Step 2: Making our own layer and recipe
 In the previous step we built Poky without any changes. But in this step we're going to customize it by adding a layer which will contain our custom image and a recipe for a helloworld application.
 
-Make sure that you're in the `poky` folder (for me `/home/oscr/yocto/poky`)
+Make sure that you're in the `poky` folder (for me that's `/home/oscr/yocto/poky`)
 
-We will now create our own layer which we will call `create iot-tech-day` and at the same time generate a recipe which we will call `helloIotTech`.
+We will now create our own layer which we will call `iot-tech-day` and at the same time generate a recipe which we will call `helloIotTech`. Rember that if you open a new terminal you need to `source oe-init-build-env` again.
 
     yocto-layer create iot-tech-day
     Please enter the layer priority you'd like to use for the layer: [default: 6] 6
@@ -76,7 +76,7 @@ We will now create our own layer which we will call `create iot-tech-day` and at
 
     Don't forget to add it to your BBLAYERS (for details see meta-iot-tech-day\README).
 
-You will notice that a folder meta-iot-tech-day has been added. 
+You will notice that a folder `meta-iot-tech-day` has been created. The `meta-` is added as a naming prefix by convention. So the name of our layer is `meta-iot-tech-day`.
 
 After adding the layer you should have folder with the following structure:
 
