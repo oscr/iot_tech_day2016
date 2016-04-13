@@ -229,11 +229,20 @@ While running bitbake you should notice that the `Build Configuration` has chang
     meta-iot-tech-day = "jethro:6dba9abd43f7584178de52b623c603a5d4fcec5c"
     meta-raspberrypi  = "jethro:f2cff839f52a6e6211337fc45c7c3eabf0fac113"
 
-TODO dd to sd card instructions
+When it's completed you will find the bootable image in TODO Add path
 
+You can for example write this image to and SD Card. Recommend reading [this](https://www.raspberrypi.org/documentation/installation/installing-images/linux.md)
+
+After you booted your Raspberry Pi you should be able to connect it to a monitor and/or ssh to it. For example
+
+    ssh root@192.168.0.17
+    root@raspberrypi:~# helloworld 
+    Hello IoT Tech Day!
+
+And this completes our exercises. But we have only scratched the surface of what is possible. You could for example add more applications, write a kernel patch, try to run Poky on something else than Raspberry Pi. There are many more things to discover and I hope you'll have fun doing so. 
 
 ## More information
-If you would like more information I can warmly recommend reading the following resources. Good luck!
+For more information I can warmly recommend reading the following resources.
 
 [Yocto Project Quick Start](http://www.yoctoproject.org/docs/current/yocto-project-qs/yocto-project-qs.htlm)
 
@@ -241,6 +250,6 @@ If you would like more information I can warmly recommend reading the following 
 
 [About meta-raspberrypi layer](http://git.yoctoproject.org/cgit/cgit.cgi/meta-raspberrypi/about/)
 
-[Yocto Project Documentation](https://www.yoctoproject.org/documentation "Yocto Project Documentation") 
+[Yocto Project Documentation](https://www.yoctoproject.org/documentation) 
 
 [Example recipe: mtr](http://cgit.openembedded.org/meta-openembedded/tree/meta-networking/recipes-support/mtr/mtr_0.86.bb)
