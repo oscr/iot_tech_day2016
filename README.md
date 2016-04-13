@@ -53,7 +53,7 @@ Note that this step will take hours. While waiting take a look at [Yocto Project
 
 Now we are ready to run. 
 
-    runqemu quemux86
+    runqemu qemux86
 
 __NOTE__ When login prompt. Enter: __root__ 
 
