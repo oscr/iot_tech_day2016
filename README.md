@@ -165,7 +165,7 @@ When startup is completed you will see the following:
     Hello IoT Tech Day!
 
 ##Step 3: Building our distribution for Raspberry Pi
-In the final step we will now get our Linux distribution running on actual Raspberry Pi hardware. To do this we need a  __Board Support Package__ to provide hardware support. We can find that in the `meta-raspberryp` layer. 
+In the final step we will now get our Linux distribution running on actual Raspberry Pi hardware. To do this we need a  __Board Support Package__ to provide hardware support. We can find this in the `meta-raspberryp` layer. We will also create another image to make our distribution run on hardware.
 
 __Hint__ You can search for available layers [here](http://layers.openembedded.org/)
 
@@ -177,7 +177,7 @@ If we check inside the meta-raspberrypi layer we will see that there are three a
     ls meta-raspberrypi/recipes-core/images/
     rpi-basic-image.bb  rpi-hwup-image.bb  rpi-test-image.bb
 
-We will base our new image on the rpi-basic-image
+We will base our new image on the `rpi-basic-image`
     
     nano meta-iot-tech-day/recipes-core/images/rpi-iot-tech-image.bb
  
@@ -189,28 +189,48 @@ Make sure the file contains:
 
 __NOTE__ Make sure to replace the full path above!
 
+Change directory to the `build` directory.
+
     cd build
-    nano conf/local.conf
     
-If you have a Raspberry Pi enter the following at the top of the file:
+We will then add the Raspberry Pi layer
 
-    MACHINE="raspberrypi" 
-
-Or if you have a Raspberry Pi 2:
-
-    MACHINE="raspberrypi2
-
-After that we want to make sure to add the Raspberry Pi layer
-
-    bitbake-layers add-layer $HOME/meta-raspberrypi/
+    bitbake-layers add-layer $HOME/yocto/poky/meta-raspberrypi/
     
-We are now ready to build our image:
+This means that your `conf/bblayers.conf` should now also have the `meta-raspberrypi` layer
 
-    bitbake rpi-iot-tech-image
+    BBLAYERS ?= " \
+      /home/oscar/yocto/poky/meta \
+      /home/oscar/yocto/poky/meta-yocto \
+      /home/oscar/yocto/poky/meta-yocto-bsp \
+      /home/oscar/yocto/poky/meta-iot-tech-day \
+      /home/oscar/yocto/poky/meta-raspberrypi \
+      "
 
-TODO Execute img
+We are now ready to build our new image with hardware support. 
 
-TODO Summary!
+If you have a __Raspberry Pi 1__ use the following command
+
+    MACHINE=raspberrypi bitbake rpi-iot-tech-image
+
+Otherwise if you have Raspberry Pi 2:
+
+    MACHINE=raspberrypi2 bitbake rpi-iot-tech-image
+
+While running bitbake you should notice that the `Build Configuration` has changed. For example:
+
+    Build Configuration:
+    ...
+    MACHINE           = "raspberrypi"
+    ...
+    meta              
+    meta-yocto        
+    meta-yocto-bsp    
+    meta-iot-tech-day = "jethro:6dba9abd43f7584178de52b623c603a5d4fcec5c"
+    meta-raspberrypi  = "jethro:f2cff839f52a6e6211337fc45c7c3eabf0fac113"
+
+TODO dd to sd card instructions
+
 
 ## More information
 If you would like more information I can warmly recommend reading the following resources. Good luck!
