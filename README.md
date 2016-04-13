@@ -59,18 +59,12 @@ __NOTE__ When login prompt. Enter: __root__
 
 __NOTE__ If you're running on a system without display you may have to use: __runqemu qemux86 nographic__
 
-Congratulations! You have just built the reference implamentation (Poky) for the first time.
-
 ##Step 2: Making our own layer and recipe
-In the previous step we build the reference implementation without any changes. In this step we’re going to customize it by adding a recipe. In order to do this will will add a layer where the recipe will be placed. We will also create our own image that will contain the recipe. 
+In the previous step we built Poky without any changes. But in this step we're going to customize it by adding a layer which will contain our custom image and a recipe for a helloworld application.
 
-Make sure your current directory is poky folder.
+Make sure that you're in the `poky` folder (for me `/home/oscr/yocto/poky`)
 
-    cd ..
-    pwd
-    /home/oscar/yocto/poky
-
-We will now create our own layer
+We will now create our own layer which we will call `create iot-tech-day` and at the same time generate a recipe which we will call `helloIotTech`.
 
     yocto-layer create iot-tech-day
     Please enter the layer priority you'd like to use for the layer: [default: 6] 6
