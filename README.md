@@ -48,7 +48,7 @@ We are now ready to build!
 
     bitbake core-image-minimal
 
-Note that this step will take hours. While waiting take a look at [Yocto Project Quick Start documentation](http://www.yoctoproject.org/docs/2.0.1/yocto-project-qs/yocto-project-qs.html "Yocto Project Quick Start")
+Note that this step will take hours. While waiting take a look at [Yocto Project Quick Start documentation](http://www.yoctoproject.org/docs/current/yocto-project-qs/yocto-project-qs.html "Yocto Project Quick Start")
 
 Now we are ready to run. 
 
